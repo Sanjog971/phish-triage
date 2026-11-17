@@ -154,5 +154,5 @@ def test_bundled_sample_reports_render_without_links(tmp_path):
     out = tmp_path / "r"
     main(["analyze", str(ROOT / "samples"), "-c", str(ROOT / "config" / "triage.toml"), "-o", str(out), "-q"])
     for md in out.glob("*/report.md"):
-        html = markdown_it.MarkdownIt("gfm-like").render(md.read_text())
+        html = markdown_it.MarkdownIt("gfm-like").render(md.read_text(encoding="utf-8"))
         assert re.findall(r'<[^>]*\b(?:href|src)\s*=', html) == [], md

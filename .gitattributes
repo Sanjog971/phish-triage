@@ -1,0 +1,3 @@
+# Evidence samples must stay byte-exact: their SHA-256 is the case ID and appears in the
+# example reports. Never let Git convert their CRLF line endings on commit or checkout.
+*.eml -text

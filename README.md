@@ -1,5 +1,7 @@
 # phish-triage
 
+[![tests](https://github.com/Sanjog971/phish-triage/actions/workflows/tests.yml/badge.svg)](https://github.com/Sanjog971/phish-triage/actions/workflows/tests.yml)
+
 A safety-first workflow for triaging **sanitized** phishing email samples. It parses an `.eml` statically and extracts headers and indicators. It checks reputation only against sources you have approved, and writes a concise incident report plus machine-readable outputs.
 
 - **Pure Python 3.11+ standard library.** `tldextract` is optional and is used offline only.

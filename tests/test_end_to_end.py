@@ -19,7 +19,7 @@ def test_batch_verdicts_and_outputs(tmp_path):
     verdicts = {}
     for case in out.iterdir():
         assert {p.name for p in case.iterdir()} == {"report.md", "report.json", "iocs.csv", "hunt.kql"}
-        data = json.loads((case / "report.json").read_text())
+        data = json.loads((case / "report.json").read_text(encoding="utf-8"))
         verdicts[data["sample"]["file"]] = data["verdict"]["label"]
     assert verdicts == {
         "01_credential_phish_internal_spoof.eml": "MALICIOUS",
@@ -31,19 +31,19 @@ def test_batch_verdicts_and_outputs(tmp_path):
 def test_reports_are_defanged_and_redacted(tmp_path):
     _, out = run(tmp_path)
     for md in out.glob("*/report.md"):
-        text = md.read_text()
+        text = md.read_text(encoding="utf-8")
         assert not re.search(r"\bhttps?://", text), md
         assert "examp1e-sso.test" not in text and "203.0.113.45" not in text
         assert "john.doe@example.com" not in text and "jane.doe@example.com" not in text
     for js in out.glob("*/report.json"):
-        data = json.loads(js.read_text())
+        data = json.loads(js.read_text(encoding="utf-8"))
         assert all(a.startswith(("j***@",)) for a in data["message"]["to"])
 
 
 def test_offline_audit_is_empty(tmp_path):
     _, out = run(tmp_path)
     for js in out.glob("*/report.json"):
-        rep = json.loads(js.read_text())["reputation"]
+        rep = json.loads(js.read_text(encoding="utf-8"))["reputation"]
         assert rep["audit"] == [] and rep["mode"].startswith("offline")
 
 
