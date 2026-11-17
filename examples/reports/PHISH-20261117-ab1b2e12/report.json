@@ -1,0 +1,513 @@
+{
+  "schema": "phish-triage/report/v1",
+  "case_id": "PHISH-20261117-ab1b2e12",
+  "analyzed_at": "2026-11-17T10:21:23.866523+00:00",
+  "tool_version": "1.0.0",
+  "verdict": {
+    "label": "LOW RISK",
+    "score": 0,
+    "confidence": "low",
+    "categories": [],
+    "summary": "No significant phishing traits found; external reputation not checked (offline run). Not a clearance - weigh the reporter's context."
+  },
+  "sample": {
+    "file": "03_benign_vendor_newsletter.eml",
+    "sha256": "ab1b2e12c5d818b2e1c791ce02a1537c9232cd6060b6d231d953e4e2c2d9b4e0",
+    "size": 2235,
+    "reported_by": null
+  },
+  "message": {
+    "from": {
+      "display_name": "Vendor Weekly",
+      "address": "news@vendor.test"
+    },
+    "reply_to": [],
+    "return_path": "bounce-77@em.vendor.test",
+    "to": [
+      "j***@example.com"
+    ],
+    "cc": [],
+    "subject": "Vendor Weekly: November product updates",
+    "date": "2026-11-16T16:30:00+00:00",
+    "message_id": "<nl-2026-11.1234@em.vendor.test>",
+    "origin_ip": "192.0.2.71",
+    "origin_method": "trust boundary (handed to mx01.example.com)",
+    "earliest_claimed_ip": "192.0.2.71",
+    "x_originating_ip": null,
+    "authentication": {
+      "source": "authentication-results",
+      "authserv_id": "mx01.example.com",
+      "trusted": true,
+      "spf": "pass",
+      "spf_domain": "em.vendor.test",
+      "dkim": [
+        [
+          "pass",
+          "vendor.test"
+        ]
+      ],
+      "dmarc": "pass",
+      "dmarc_from": "vendor.test",
+      "dmarc_policy": "reject",
+      "compauth": null,
+      "ignored": [],
+      "note": ""
+    },
+    "dkim_signatures": [
+      {
+        "d": "vendor.test",
+        "s": "k1"
+      }
+    ],
+    "received_hops_newest_first": [
+      {
+        "from_host": "mx01.example.com",
+        "from_ip": "10.20.0.5",
+        "by_host": "mbx03.example.com",
+        "protocol": "ESMTPS",
+        "timestamp": "2026-11-16T16:30:04+00:00",
+        "delay_s": 2.0
+      },
+      {
+        "from_host": "out-7.em.vendor.test",
+        "from_ip": "192.0.2.71",
+        "by_host": "mx01.example.com",
+        "protocol": "ESMTPS",
+        "timestamp": "2026-11-16T16:30:02+00:00",
+        "delay_s": null
+      }
+    ],
+    "body_parts": {
+      "text": 1,
+      "html": 1
+    }
+  },
+  "findings": [],
+  "indicators": [
+    {
+      "type": "url",
+      "value": "https://www.vendor.test/blog/november-updates",
+      "display": null,
+      "defanged": "hxxps://www[.]vendor[.]test/blog/november-updates",
+      "sources": [
+        "text body",
+        "HTML a.href"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {
+        "host": "www.vendor.test",
+        "port": null,
+        "is_ip": false,
+        "userinfo": false,
+        "punycode": false,
+        "unicode_host": null,
+        "scheme": "https"
+      },
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "url",
+          "value": "https://www.vendor.test/blog/november-updates",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "value": "https://www.vendor.test/events",
+      "display": null,
+      "defanged": "hxxps://www[.]vendor[.]test/events",
+      "sources": [
+        "text body",
+        "HTML a.href"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {
+        "host": "www.vendor.test",
+        "port": null,
+        "is_ip": false,
+        "userinfo": false,
+        "punycode": false,
+        "unicode_host": null,
+        "scheme": "https"
+      },
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "url",
+          "value": "https://www.vendor.test/events",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "value": "https://cdn.vendor.test/img/header.png",
+      "display": null,
+      "defanged": "hxxps://cdn[.]vendor[.]test/img/header.png",
+      "sources": [
+        "HTML img.src"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {
+        "host": "cdn.vendor.test",
+        "port": null,
+        "is_ip": false,
+        "userinfo": false,
+        "punycode": false,
+        "unicode_host": null,
+        "scheme": "https"
+      },
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "url",
+          "value": "https://cdn.vendor.test/img/header.png",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "value": "https://updates.vendor.test/unsubscribe?u=REDACTED",
+      "display": null,
+      "defanged": "hxxps://updates[.]vendor[.]test/unsubscribe?u=REDACTED",
+      "sources": [
+        "HTML a.href",
+        "List-Unsubscribe"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {
+        "host": "updates.vendor.test",
+        "port": null,
+        "is_ip": false,
+        "userinfo": false,
+        "punycode": false,
+        "unicode_host": null,
+        "scheme": "https"
+      },
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "url",
+          "value": "https://updates.vendor.test/unsubscribe?u=REDACTED",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "domain",
+      "value": "vendor.test",
+      "display": null,
+      "defanged": "vendor[.]test",
+      "sources": [
+        "From"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "domain",
+          "value": "vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "domain",
+      "value": "em.vendor.test",
+      "display": null,
+      "defanged": "em[.]vendor[.]test",
+      "sources": [
+        "Return-Path"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "domain",
+          "value": "em.vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "domain",
+      "value": "www.vendor.test",
+      "display": null,
+      "defanged": "www[.]vendor[.]test",
+      "sources": [
+        "link host"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "domain",
+          "value": "www.vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "domain",
+      "value": "cdn.vendor.test",
+      "display": null,
+      "defanged": "cdn[.]vendor[.]test",
+      "sources": [
+        "link host"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "domain",
+          "value": "cdn.vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "domain",
+      "value": "updates.vendor.test",
+      "display": null,
+      "defanged": "updates[.]vendor[.]test",
+      "sources": [
+        "link host"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "domain",
+          "value": "updates.vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "ip",
+      "value": "192.0.2.71",
+      "display": null,
+      "defanged": "192[.]0[.]2[.]71",
+      "sources": [
+        "origin IP"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "non-routable or documentation range (sanitized)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": []
+    },
+    {
+      "type": "email",
+      "value": "news@vendor.test",
+      "display": null,
+      "defanged": "news[@]vendor[.]test",
+      "sources": [
+        "From"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "email addresses are never sent externally",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "email",
+          "value": "news@vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "email",
+      "value": "bounce-77@em.vendor.test",
+      "display": null,
+      "defanged": "bounce-77[@]em[.]vendor[.]test",
+      "sources": [
+        "Return-Path"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "email addresses are never sent externally",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "email",
+          "value": "bounce-77@em.vendor.test",
+          "status": "allowlisted",
+          "summary": "Approved marketing vendor (procurement ref VND-118) (via domain entry vendor.test)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    }
+  ],
+  "attachments": [],
+  "recommended_actions": [
+    "Close as low risk with a short note to the reporter.",
+    "Escalate manually if the reporter describes something not captured here (call-back number, QR code, prior thread)."
+  ],
+  "reputation": {
+    "mode": "offline (local intel only; no external requests)",
+    "sources": [
+      {
+        "source": "local_intel",
+        "approved": true,
+        "ready": true,
+        "detail": "/home/claude/phish-triage/config/local_intel.csv"
+      },
+      {
+        "source": "virustotal",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "abuseipdb",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "urlhaus",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "threatfox",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "malwarebazaar",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "google_safe_browsing",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      }
+    ],
+    "audit": []
+  },
+  "notes": []
+}

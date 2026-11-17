@@ -1,0 +1,102 @@
+# phish-triage configuration
+# Relative paths are resolved from this file's directory.
+# Placeholders use example.com / *.test so they match the sanitized samples - replace with your own.
+
+[organization]
+name = "Example Corp"
+# Your accepted mail domains. Mail "from" these that arrives from outside and fails DMARC is a spoof.
+internal_domains = ["example.com"]
+# Domains attackers imitate (yours + brands your users trust). Used for lookalike detection.
+protected_domains = [
+  "example.com",
+  "microsoft.com", "microsoftonline.com", "office.com", "outlook.com", "sharepoint.com",
+  "docusign.net", "docusign.com", "adobe.com", "paypal.com", "apple.com", "google.com",
+  "amazon.com", "dropbox.com", "linkedin.com", "wetransfer.com",
+]
+# Display names that must only come from protected/internal domains.
+protected_display_names = ["Example Corp", "IT Service Desk", "Microsoft", "Office 365", "DocuSign", "PayPal"]
+# Authentication-Results authserv-ids written by YOUR mail system; others are ignored as untrusted.
+# Microsoft 365 omits the authserv-id - use ["topmost"] there.
+trusted_authserv_ids = ["*.example.com"]
+# Your MTAs/gateways (wildcards ok). Used to find the trust-boundary origin IP.
+# e.g. ["*.protection.outlook.com", "*.outlook.com", "mx*.example.com"]
+trusted_mta_hosts = ["*.example.com"]
+
+[analysis]
+max_email_bytes = 26214400            # 25 MiB; larger inputs are rejected unparsed
+max_text_attachment_bytes = 2097152   # text/HTML attachments scanned up to this size
+max_mime_depth = 15
+unwrap_reported_messages = true       # analyze the embedded message in user-reported (forwarded-as-attachment) mail
+redact_recipients = true              # victim addresses masked in reports
+# Free-mail providers (this list replaces the built-in one). "freemail.test" is a sanitized-sample placeholder.
+freemail_domains = [
+  "gmail.com", "googlemail.com", "outlook.com", "hotmail.com", "live.com", "msn.com",
+  "yahoo.com", "ymail.com", "aol.com", "icloud.com", "me.com", "mail.com", "gmx.com",
+  "gmx.net", "proton.me", "protonmail.com", "zoho.com", "yandex.com", "yandex.ru",
+  "mail.ru", "rediffmail.com", "qq.com", "163.com",
+  "freemail.test",
+]
+
+[reputation]
+max_lookups_per_run = 60
+timeout_seconds = 15
+cache_path = "../.triage-cache/reputation.json"
+cache_ttl_hours = 24
+# What URL form leaves the host: "full" | "strip_fragment" | "strip_query".
+# URLs that embed a recipient identifier are ALWAYS sent with query+fragment stripped.
+url_outbound_policy = "strip_fragment"
+
+# ---------------------------------------------------------------------------------------------
+# APPROVED SOURCES
+# A source is contacted only when ALL of these hold:
+#   1. enabled = true here (your data-sharing approval),
+#   2. its API key env var is set,
+#   3. the run uses --online,
+#   4. the indicator type is in its `share` list and the indicator is eligible
+#      (never: email addresses, internal/private/reserved/free-mail indicators).
+# Providers are lookup-only: submission/scan/upload endpoints are not declared and are blocked.
+# ---------------------------------------------------------------------------------------------
+
+[sources.local_intel]            # your own CSV; offline, always consulted
+enabled = true
+path = "local_intel.csv"
+
+[sources.virustotal]
+enabled = false
+api_key_env = "VT_API_KEY"
+share = ["url", "domain", "ip", "sha256"]
+requests_per_minute = 4          # public API limit
+malicious_threshold = 3          # engines flagging malicious before we call it malicious
+
+[sources.abuseipdb]
+enabled = false
+api_key_env = "ABUSEIPDB_API_KEY"
+share = ["ip"]
+requests_per_minute = 30
+max_age_days = 90
+malicious_score = 75
+suspicious_score = 25
+
+[sources.urlhaus]
+enabled = false
+api_key_env = "ABUSECH_AUTH_KEY"  # one free abuse.ch Auth-Key covers URLhaus, ThreatFox, MalwareBazaar
+share = ["url", "domain", "ip", "sha256"]
+requests_per_minute = 60
+
+[sources.threatfox]
+enabled = false
+api_key_env = "ABUSECH_AUTH_KEY"
+share = ["url", "domain", "ip", "sha256"]
+requests_per_minute = 60
+
+[sources.malwarebazaar]
+enabled = false
+api_key_env = "ABUSECH_AUTH_KEY"
+share = ["sha256"]
+requests_per_minute = 60
+
+[sources.google_safe_browsing]   # Lookup API v4 - Google's terms limit it to non-commercial use
+enabled = false
+api_key_env = "GSB_API_KEY"
+share = ["url"]
+requests_per_minute = 60

@@ -1,0 +1,48 @@
+Return-Path: <bounce-77@em.vendor.test>
+Received: from mx01.example.com (mx01.example.com [10.20.0.5])
+	by mbx03.example.com (Postfix) with ESMTPS id 9Hh1
+	for <john.doe@example.com>; Mon, 16 Nov 2026 16:30:04 +0000 (UTC)
+Authentication-Results: mx01.example.com;
+	spf=pass smtp.mailfrom=bounce-77@em.vendor.test;
+	dkim=pass header.d=vendor.test header.s=k1;
+	dmarc=pass (p=REJECT dis=NONE) header.from=vendor.test
+Received: from out-7.em.vendor.test (out-7.em.vendor.test [192.0.2.71])
+	by mx01.example.com (Postfix) with ESMTPS id 9Hh0
+	for <john.doe@example.com>; Mon, 16 Nov 2026 16:30:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vendor.test; s=k1;
+	h=from:to:subject:date:list-unsubscribe; bh=REDACTED; b=REDACTED
+From: Vendor Weekly <news@vendor.test>
+To: john.doe@example.com
+Subject: Vendor Weekly: November product updates
+Date: Mon, 16 Nov 2026 16:30:00 +0000
+Message-ID: <nl-2026-11.1234@em.vendor.test>
+List-Unsubscribe: <https://updates.vendor.test/unsubscribe?u=REDACTED>, <mailto:unsubscribe@vendor.test>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="nl_alt"
+
+--nl_alt
+Content-Type: text/plain; charset="utf-8"
+
+Hi John,
+
+Here is what shipped this month: new dashboards, faster CSV exports and the
+December webinar schedule. Read the full post: https://www.vendor.test/blog/november-updates
+
+Events: https://www.vendor.test/events
+
+--nl_alt
+Content-Type: text/html; charset="utf-8"
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><body>
+<img src="https://cdn.vendor.test/img/header.png" alt="Vendor Weekly">
+<h1>November product updates</h1>
+<p>Hi John, here is what shipped this month: new dashboards, faster CSV exports and the
+December webinar schedule.</p>
+<p><a href="https://www.vendor.test/blog/november-updates">Read the full post</a> &middot;
+<a href="https://www.vendor.test/events">www.vendor.test/events</a></p>
+<p style="font-size:11px"><a href="https://updates.vendor.test/unsubscribe?u=REDACTED">Unsubscribe</a></p>
+</body></html>
+
+--nl_alt--

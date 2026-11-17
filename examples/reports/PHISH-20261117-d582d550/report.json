@@ -1,0 +1,377 @@
+{
+  "schema": "phish-triage/report/v1",
+  "case_id": "PHISH-20261117-d582d550",
+  "analyzed_at": "2026-11-17T10:21:23.860393+00:00",
+  "tool_version": "1.0.0",
+  "verdict": {
+    "label": "LIKELY MALICIOUS",
+    "score": 100,
+    "confidence": "medium",
+    "categories": [
+      "malware delivery",
+      "credential phishing"
+    ],
+    "summary": "Strong phishing traits; external reputation not checked (offline run). Assessment: malware delivery, credential phishing. Key signals: Attachment uses a decoy double extension; HTML form collects a password; HTML/SVG attachment (credential page or smuggling); HTML attachment contains loader/exfil script traits."
+  },
+  "sample": {
+    "file": "02_reported_html_attachment.eml",
+    "sha256": "d582d550a1ee9bfae343b0daa639914ad3e78285f125fe71cc9a1df80a0ad167",
+    "size": 3249,
+    "reported_by": {
+      "reporter": "j***@example.com",
+      "subject": "FW: Remittance advice #44817 - payment released",
+      "date": "Tue, 17 Nov 2026 09:01:44 +0000",
+      "embedded_messages": 1
+    }
+  },
+  "message": {
+    "from": {
+      "display_name": "Accounts Payable",
+      "address": "ap@northwind-billing.test"
+    },
+    "reply_to": [],
+    "return_path": "ap@northwind-billing.test",
+    "to": [
+      "j***@example.com"
+    ],
+    "cc": [],
+    "subject": "Remittance advice #44817 - payment released",
+    "date": "2026-11-16T14:03:05+00:00",
+    "message_id": "<a1b2c3d4.44817@northwind-billing.test>",
+    "origin_ip": "198.51.100.23",
+    "origin_method": "trust boundary (handed to mx02.example.com)",
+    "earliest_claimed_ip": "198.51.100.23",
+    "x_originating_ip": null,
+    "authentication": {
+      "source": "authentication-results",
+      "authserv_id": "mx02.example.com",
+      "trusted": true,
+      "spf": "pass",
+      "spf_domain": "northwind-billing.test",
+      "dkim": [
+        [
+          "pass",
+          "northwind-billing.test"
+        ]
+      ],
+      "dmarc": "pass",
+      "dmarc_from": "northwind-billing.test",
+      "dmarc_policy": "none",
+      "compauth": null,
+      "ignored": [],
+      "note": ""
+    },
+    "dkim_signatures": [
+      {
+        "d": "northwind-billing.test",
+        "s": "s1"
+      }
+    ],
+    "received_hops_newest_first": [
+      {
+        "from_host": "mx02.example.com",
+        "from_ip": "10.20.0.6",
+        "by_host": "mbx01.example.com",
+        "protocol": "ESMTPS",
+        "timestamp": "2026-11-16T14:03:12+00:00",
+        "delay_s": 2.0
+      },
+      {
+        "from_host": "smtp.northwind-billing.test",
+        "from_ip": "198.51.100.23",
+        "by_host": "mx02.example.com",
+        "protocol": "ESMTPS",
+        "timestamp": "2026-11-16T14:03:10+00:00",
+        "delay_s": null
+      }
+    ],
+    "body_parts": {
+      "text": 0,
+      "html": 1
+    }
+  },
+  "findings": [
+    {
+      "id": "ATTACHMENT_DOUBLE_EXTENSION",
+      "severity": "high",
+      "weight": 25,
+      "title": "Attachment uses a decoy double extension",
+      "evidence": [
+        "Remittance_Advice_44817.pdf.html"
+      ]
+    },
+    {
+      "id": "CREDENTIAL_FORM",
+      "severity": "high",
+      "weight": 25,
+      "title": "HTML form collects a password",
+      "evidence": [
+        "attachment Remittance_Advice_44817.pdf.html: posts to hxxps://collect[.]invoice-portal[.]test/rx/submit.php"
+      ]
+    },
+    {
+      "id": "ATTACHMENT_HTML",
+      "severity": "medium",
+      "weight": 20,
+      "title": "HTML/SVG attachment (credential page or smuggling)",
+      "evidence": [
+        "Remittance_Advice_44817.pdf.html"
+      ]
+    },
+    {
+      "id": "HTML_SMUGGLING_TRAITS",
+      "severity": "medium",
+      "weight": 20,
+      "title": "HTML attachment contains loader/exfil script traits",
+      "evidence": [
+        "attachment Remittance_Advice_44817.pdf.html: base64 decoding (atob)"
+      ]
+    },
+    {
+      "id": "REPUTATION_SUSPICIOUS",
+      "severity": "medium",
+      "weight": 15,
+      "title": "Indicator flagged suspicious by an approved source",
+      "evidence": [
+        "198[.]51[.]100[.]23 - local_intel: Seen in prior invoice-fraud attempts (case PHISH-2026-0377)"
+      ]
+    },
+    {
+      "id": "PREFILLED_RECIPIENT",
+      "severity": "medium",
+      "weight": 10,
+      "title": "Form is pre-filled with the recipient's address",
+      "evidence": [
+        "attachment Remittance_Advice_44817.pdf.html: targeted kit (personalised per victim)"
+      ]
+    },
+    {
+      "id": "LURE_LANGUAGE",
+      "severity": "low",
+      "weight": 5,
+      "title": "Urgency / credential-lure language",
+      "evidence": [
+        "sign in with your email"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "type": "url",
+      "value": "https://collect.invoice-portal.test/rx/submit.php",
+      "display": null,
+      "defanged": "hxxps://collect[.]invoice-portal[.]test/rx/submit.php",
+      "sources": [
+        "attachment Remittance_Advice_44817.pdf.html (form.action)"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {
+        "host": "collect.invoice-portal.test",
+        "port": null,
+        "is_ip": false,
+        "userinfo": false,
+        "punycode": false,
+        "unicode_host": null,
+        "scheme": "https"
+      },
+      "reputation": []
+    },
+    {
+      "type": "domain",
+      "value": "northwind-billing.test",
+      "display": null,
+      "defanged": "northwind-billing[.]test",
+      "sources": [
+        "From",
+        "Return-Path"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": []
+    },
+    {
+      "type": "domain",
+      "value": "collect.invoice-portal.test",
+      "display": null,
+      "defanged": "collect[.]invoice-portal[.]test",
+      "sources": [
+        "link host"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "reserved/sanitized name (RFC 2606/6761)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": []
+    },
+    {
+      "type": "ip",
+      "value": "198.51.100.23",
+      "display": null,
+      "defanged": "198[.]51[.]100[.]23",
+      "sources": [
+        "origin IP"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "non-routable or documentation range (sanitized)",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": [
+        {
+          "source": "local_intel",
+          "ioc_type": "ip",
+          "value": "198.51.100.23",
+          "status": "suspicious",
+          "summary": "Seen in prior invoice-fraud attempts (case PHISH-2026-0377)",
+          "link": null,
+          "data": {},
+          "cached": false,
+          "checked_at": "2026-11-17T10:21:23+00:00"
+        }
+      ]
+    },
+    {
+      "type": "sha256",
+      "value": "89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba",
+      "display": null,
+      "defanged": "89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba",
+      "sources": [
+        "attachment Remittance_Advice_44817.pdf.html"
+      ],
+      "tags": [],
+      "lookup_eligible": true,
+      "skip_reason": null,
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": []
+    },
+    {
+      "type": "email",
+      "value": "ap@northwind-billing.test",
+      "display": null,
+      "defanged": "ap[@]northwind-billing[.]test",
+      "sources": [
+        "From",
+        "Return-Path"
+      ],
+      "tags": [
+        "reserved"
+      ],
+      "lookup_eligible": false,
+      "skip_reason": "email addresses are never sent externally",
+      "wrapped_forms": [],
+      "meta": {},
+      "reputation": []
+    }
+  ],
+  "attachments": [
+    {
+      "filename": "Remittance_Advice_44817.pdf.html",
+      "declared_type": "text/html",
+      "detected_type": "html",
+      "size": 539,
+      "md5": "1cbddcbcfb84a20f6f13f80b294b319e",
+      "sha1": "f6ed5a0e9cc20469ead3232ce7ec8cc0279ceb22",
+      "sha256": "89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba",
+      "disposition": "attachment",
+      "archive_entries": [],
+      "archive_encrypted": false,
+      "has_macros": false,
+      "flags": [
+        "HTML/SVG",
+        "double extension"
+      ],
+      "html": {
+        "forms": [
+          {
+            "action": "https://collect.invoice-portal.test/rx/submit.php",
+            "method": "post",
+            "inputs": [
+              "email",
+              "password"
+            ],
+            "password": true
+          }
+        ],
+        "password_inputs": 1,
+        "scripts": 1,
+        "js_traits": [
+          "base64 decoding (atob)"
+        ],
+        "meta_refresh": []
+      }
+    }
+  ],
+  "recommended_actions": [
+    "**Contain** - search and purge every copy (same Message-ID, or sender + subject); see `hunt.kql` §1.",
+    "**Block** - 3 URL/domain indicator(s) at web proxy, DNS filter and mail gateway (`iocs.csv`).",
+    "**Block** - attachment SHA-256 in EDR and the mail gateway; check endpoints for the file (`hunt.kql` §5).",
+    "**Block sender** - northwind-billing[.]test (first rule out a compromised legitimate partner).",
+    "**Scope exposure** - identify recipients who clicked or opened the lure (`hunt.kql` §1, §4). For anyone who entered credentials: reset password, revoke sessions/refresh tokens, review MFA methods, inbox rules and sign-in logs.",
+    "**Close the loop** - thank the reporter, warn recipients, and share IOCs with your intel platform per policy."
+  ],
+  "reputation": {
+    "mode": "offline (local intel only; no external requests)",
+    "sources": [
+      {
+        "source": "local_intel",
+        "approved": true,
+        "ready": true,
+        "detail": "/home/claude/phish-triage/config/local_intel.csv"
+      },
+      {
+        "source": "virustotal",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "abuseipdb",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "urlhaus",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "threatfox",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "malwarebazaar",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      },
+      {
+        "source": "google_safe_browsing",
+        "approved": false,
+        "ready": false,
+        "detail": "not approved (enabled = false)"
+      }
+    ],
+    "audit": []
+  },
+  "notes": []
+}

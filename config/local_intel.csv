@@ -1,0 +1,7 @@
+# Local intel - consulted offline, never transmitted.
+# type: url | domain | ip | sha256 | email     verdict: malicious | suspicious | benign
+# Domain entries also match subdomains and any URL on that host.
+type,value,verdict,note
+domain,examp1e-sso.test,malicious,Internal TI: M365 credential-harvest kit (case PHISH-2026-0412)
+ip,198.51.100.23,suspicious,Seen in prior invoice-fraud attempts (case PHISH-2026-0377)
+domain,vendor.test,benign,Approved marketing vendor (procurement ref VND-118)

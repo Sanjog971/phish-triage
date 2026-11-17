@@ -1,0 +1,42 @@
+// Hunt queries for PHISH-20261117-d582d550 - Microsoft Defender XDR advanced hunting
+// Values below are LIVE (not defanged). They are query strings, not links.
+// Window: last 14 days. Review each query before running.
+
+// 1. Delivery scope: every copy of this message / campaign
+EmailEvents
+| where Timestamp > ago(14d)
+| where InternetMessageId == "<a1b2c3d4.44817@northwind-billing.test>"
+    or (SenderFromAddress =~ "ap@northwind-billing.test" and Subject == "Remittance advice #44817 - payment released")
+| summarize Recipients = dcount(RecipientEmailAddress), RecipientList = make_set(RecipientEmailAddress, 200),
+    Actions = make_set(DeliveryAction), Locations = make_set(DeliveryLocation),
+    FirstSeen = min(Timestamp), LastSeen = max(Timestamp) by SenderFromAddress, Subject, SenderIPv4
+
+// 2. Other mail from the same sending IP
+EmailEvents
+| where Timestamp > ago(14d)
+| where SenderIPv4 == "198.51.100.23"
+| summarize Messages = count(), Senders = make_set(SenderFromAddress, 50), Subjects = make_set(Subject, 50)
+
+// 3. Messages containing links to these hosts
+EmailUrlInfo
+| where Timestamp > ago(14d)
+| where UrlDomain in~ ("collect.invoice-portal.test")
+| join kind=inner (EmailEvents | where Timestamp > ago(14d)) on NetworkMessageId
+| project Timestamp, RecipientEmailAddress, SenderFromAddress, Subject, Url, DeliveryAction, DeliveryLocation
+
+// 4. Who clicked (Safe Links click telemetry)
+UrlClickEvents
+| where Timestamp > ago(14d)
+| where Url has_any ("collect.invoice-portal.test")
+| project Timestamp, AccountUpn, Url, ActionType, IsClickedThrough, IPAddress
+
+// 5. Attachment delivery and presence on endpoints
+EmailAttachmentInfo
+| where Timestamp > ago(14d)
+| where SHA256 in ("89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba")
+| project Timestamp, RecipientEmailAddress, SenderFromAddress, FileName, SHA256
+
+DeviceFileEvents
+| where Timestamp > ago(14d)
+| where SHA256 in ("89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba")
+| project Timestamp, DeviceName, ActionType, FileName, FolderPath, InitiatingProcessAccountName

@@ -1,0 +1,7 @@
+type,value,defanged,worst_status,sources,tags,lookup_eligible,skip_reason,reputation
+url,https://collect.invoice-portal.test/rx/submit.php,hxxps://collect[.]invoice-portal[.]test/rx/submit.php,,attachment Remittance_Advice_44817.pdf.html (form.action),reserved,False,reserved/sanitized name (RFC 2606/6761),
+domain,northwind-billing.test,northwind-billing[.]test,,From; Return-Path,reserved,False,reserved/sanitized name (RFC 2606/6761),
+domain,collect.invoice-portal.test,collect[.]invoice-portal[.]test,,link host,reserved,False,reserved/sanitized name (RFC 2606/6761),
+ip,198.51.100.23,198[.]51[.]100[.]23,suspicious,origin IP,reserved,False,non-routable or documentation range (sanitized),local_intel:suspicious
+sha256,89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba,89e8321b45989ff9121e351961bf68be7efcb2c596c5841a19b17ff7bf95daba,,attachment Remittance_Advice_44817.pdf.html,,True,,
+email,ap@northwind-billing.test,ap[@]northwind-billing[.]test,,From; Return-Path,reserved,False,email addresses are never sent externally,

@@ -1,0 +1,13 @@
+type,value,defanged,worst_status,sources,tags,lookup_eligible,skip_reason,reputation
+url,https://www.vendor.test/blog/november-updates,hxxps://www[.]vendor[.]test/blog/november-updates,allowlisted,text body; HTML a.href,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+url,https://www.vendor.test/events,hxxps://www[.]vendor[.]test/events,allowlisted,text body; HTML a.href,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+url,https://cdn.vendor.test/img/header.png,hxxps://cdn[.]vendor[.]test/img/header.png,allowlisted,HTML img.src,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+url,https://updates.vendor.test/unsubscribe?u=REDACTED,hxxps://updates[.]vendor[.]test/unsubscribe?u=REDACTED,allowlisted,HTML a.href; List-Unsubscribe,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+domain,vendor.test,vendor[.]test,allowlisted,From,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+domain,em.vendor.test,em[.]vendor[.]test,allowlisted,Return-Path,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+domain,www.vendor.test,www[.]vendor[.]test,allowlisted,link host,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+domain,cdn.vendor.test,cdn[.]vendor[.]test,allowlisted,link host,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+domain,updates.vendor.test,updates[.]vendor[.]test,allowlisted,link host,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:allowlisted
+ip,192.0.2.71,192[.]0[.]2[.]71,,origin IP,reserved,False,non-routable or documentation range (sanitized),
+email,news@vendor.test,news[@]vendor[.]test,allowlisted,From,reserved,False,email addresses are never sent externally,local_intel:allowlisted
+email,bounce-77@em.vendor.test,bounce-77[@]em[.]vendor[.]test,allowlisted,Return-Path,reserved,False,email addresses are never sent externally,local_intel:allowlisted

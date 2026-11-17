@@ -1,0 +1,13 @@
+type,value,defanged,worst_status,sources,tags,lookup_eligible,skip_reason,reputation
+url,https://examp1e-sso.test/owa/auth?uid=REDACTED#am9obi5kb2VAZXhhbXBsZS5jb20=,hxxps://examp1e-sso[.]test/owa/auth?uid=REDACTED#[recipient-id],malicious,text body; HTML a.href,recipient-identifier; unwrapped:microsoft-safelinks; reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:malicious
+url,http://203.0.113.77:8080/keep-password/,hxxp://203[.]0[.]113[.]77:8080/keep-password/,,text body; HTML a.href,reserved,False,non-routable or documentation range (sanitized),
+url,https://cdn.bulk-sender.test/o.gif?r=REDACTED,hxxps://cdn[.]bulk-sender[.]test/o.gif?r=REDACTED,,HTML img.src,reserved,False,reserved/sanitized name (RFC 2606/6761),
+domain,freemail.test,freemail[.]test,,Reply-To,freemail,False,free-mail provider (shared infrastructure),
+domain,mailer.bulk-sender.test,mailer[.]bulk-sender[.]test,,Return-Path,reserved,False,reserved/sanitized name (RFC 2606/6761),
+domain,examp1e-sso.test,examp1e-sso[.]test,malicious,link host,reserved,False,reserved/sanitized name (RFC 2606/6761),local_intel:malicious
+domain,cdn.bulk-sender.test,cdn[.]bulk-sender[.]test,,link host,reserved,False,reserved/sanitized name (RFC 2606/6761),
+ip,203.0.113.45,203[.]0[.]113[.]45,,origin IP,reserved,False,non-routable or documentation range (sanitized),
+ip,198.51.100.200,198[.]51[.]100[.]200,,earliest Received hop,reserved,False,non-routable or documentation range (sanitized),
+ip,203.0.113.77,203[.]0[.]113[.]77,,link host,reserved,False,non-routable or documentation range (sanitized),
+email,it.servicedesk.verify@freemail.test,it.servicedesk.verify[@]freemail[.]test,,Reply-To,freemail,False,email addresses are never sent externally,
+email,bounce+7f3a@mailer.bulk-sender.test,bounce+7f3a[@]mailer[.]bulk-sender[.]test,,Return-Path,reserved,False,email addresses are never sent externally,
